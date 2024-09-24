@@ -1,0 +1,4 @@
+heat_use	match_invest_cost_electric_heat	match_operate_cost_electric_heat	match_retire_cost_electric_heat	match_efficiency_electric_heat	match_invest_cost_hydrogen_heat	match_operate_cost_hydrogen_heat	match_retire_cost_hydrogen_heat	match_efficiency_hydrogen_heat
+space	6905057	4620221	618643	5.416	2427317	3337251	217358	1.093
+water	5781034	827014	527577	5.114	3177842	454976	290010	0.927
+boiler	2240524	666667	195384	1.123	3715535	1105556	324012	1.044

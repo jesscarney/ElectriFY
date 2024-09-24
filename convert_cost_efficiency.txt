@@ -1,0 +1,2 @@
+e2h_invest_cost	e2h_operate_cost	e2h_retire_cost	e2h_efficiency	h2e_invest_cost	h2e_operate_cost	h2e_retire_cost	h2e_efficiency	h2e_refit_cost
+4253079	2188258	349148	0.65	12477851	5991999	1024345	0.359	1834244

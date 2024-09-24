@@ -1,0 +1,103 @@
+### time and location
+
+set time := 1	2	3	4	5	6	7	8	9	10
+11	12	13	14	15	16	17	18	19	20
+21	22	23	24	25	26	27	28	29	30
+31	32	33	34	35	36	37	38	39	40
+41	42	43	44	45	46	47	48	49	50
+51	52	53	54	55	56	57	58	59	60
+61	62	63	64	65	66	67	68	69	70
+71	72	73	74	75	76	77	78	79	80
+81	82	83	84	85	86	87	88	89	90
+91	92	93	94	95	96	97	98	99	100
+101	102	103	104	105	106	107	108	109	110
+111	112	113	114	115	116	117	118	119	120
+121	122	123	124	125	126	127	128	129	130
+131	132	133	134	135	136	137	138	139	140
+141	142	143	144	145	146	147	148	149	150
+151	152	153	154	155	156	157	158	159	160
+161	162	163	164	165	166	167	168	169	170
+171	172	173	174	175	176	177	178	179	180
+181	182	183	184	185	186	187	188	189	190
+191	192	193	194	195	196	197	198	199	200
+201	202	203	204	205	206	207	208	209	210
+211	212	213	214	215	216	217	218	219	220
+221	222	223	224	225	226	227	228	229	230
+231	232	233	234	235	236	237	238	239	240
+241	242	243	244	245	246	247	248	249	250
+251	252	253	254	255	256	257	258	259	260
+261	262	263	264	265	266	267	268	269	270
+271	272	273	274	275	276	277	278	279	280
+281	282	283	284	285	286	287	288 ;
+set location :=	ISONE	NYISO	PJM	MISO	SPP	ERCOT	CAISO	Southeast	Southwest	Northwest ;
+
+load distance.txt using=tab : [location_out,location_in] location_distance ;
+param time_steps := 288 ;
+param invest_operate_ratio := 30.4 ; 	#8760/time_steps
+
+### energy sources and uses
+
+set electric_source := solar	wind	hydro	nuclear	bioenergy	fossil	other ;
+set fuel_source := biomass	biofuel	naturalgas	petroleum	coal ;
+set heat_use := space	water	boiler ;
+set transport_use := lightduty	heavyduty ;
+set fix_use := buildings	transportation	industry ;
+
+load heat_demand.txt using=tab : [heat_use,time,location] heat_demand ;
+load transport_demand.txt using=tab : [transport_use,time,location] transport_demand ;
+load fix_demand_electric.txt using=tab : [fix_use,time,location] fix_demand_electric	fix_demand_hydrogen ;
+load fix_demand_fuel.txt using=tab : [fuel_source,fix_use,time,location] fix_demand_fuel ;
+
+### electricity 
+
+load resource_availability.txt using=tab : [electric_source,time,location] resource_availability ;
+
+load generate_cost_efficiency.txt using=tab : [electric_source] generate_invest_cost	generate_operate_cost	generate_retire_cost	generate_efficiency	generate_emit_rate ;
+
+load generate_fuel_cost.txt using=tab : [electric_source,time,location] generate_fuel_cost ;
+
+load store_transmit_cost_efficiency.txt using=tab : store_invest_cost	store_operate_cost	store_retire_cost	store_efficiency	transmit_invest_cost	transmit_operate_cost	transmit_retire_cost	transmit_efficiency ;
+
+### hydrogen
+
+load convert_cost_efficiency.txt using=tab : e2h_invest_cost	e2h_operate_cost	e2h_retire_cost	e2h_efficiency	h2e_invest_cost	h2e_operate_cost	h2e_retire_cost	h2e_efficiency h2e_refit_cost ;
+
+load reserve_pipe_cost_efficiency.txt using=tab : reserve_invest_cost	reserve_operate_cost	reserve_retire_cost	reserve_efficiency	reserve_refit_cost	reserve_max_flow	pipe_invest_cost	pipe_operate_cost	pipe_retire_cost	pipe_efficiency	pipe_refit_cost ;
+
+### existing
+
+load generate_exist.txt using=tab : [electric_source,location] generate_exist_capacity ;
+load convert_exist.txt using=tab : [location] e2h_exist_capacity h2e_exist_capacity ;
+load store_reserve_exist.txt using=tab : [location] store_exist_capacity	reserve_exist_capacity ;
+load transmit_pipe_exist.txt using=tab : [location_out,location_in] transmit_exist_capacity	pipe_exist_capacity ;
+
+### fuel
+
+load fuel_cost.txt using=tab : [fuel_source,time,location] fuel_cost ;
+load fuel_emit.txt using=tab : [fuel_source] fuel_emit_rate ;
+param bioenergy_convert_efficiency := 0.638 ;
+
+### matching
+
+load match_cost_efficiency_electric_heat.txt using=tab : [heat_use] match_invest_cost_electric_heat	match_operate_cost_electric_heat	match_retire_cost_electric_heat	match_efficiency_electric_heat	match_invest_cost_hydrogen_heat	match_operate_cost_hydrogen_heat	match_retire_cost_hydrogen_heat	match_efficiency_hydrogen_heat ;
+load match_cost_efficiency_fuel_heat.txt using=tab : [fuel_source,heat_use] match_invest_cost_fuel_heat	match_operate_cost_fuel_heat	match_retire_cost_fuel_heat	match_efficiency_fuel_heat ;
+
+load match_cost_efficiency_electric_transport.txt using=tab : [transport_use] match_invest_cost_electric_transport	match_operate_cost_electric_transport	match_retire_cost_electric_transport	match_efficiency_electric_transport	match_invest_cost_hydrogen_transport	match_operate_cost_hydrogen_transport	match_retire_cost_hydrogen_transport	match_efficiency_hydrogen_transport ;
+load match_cost_efficiency_fuel_transport.txt using=tab : [fuel_source,transport_use] match_invest_cost_fuel_transport	match_operate_cost_fuel_transport	match_retire_cost_fuel_transport	match_efficiency_fuel_transport ;
+
+load match_exist_electric_heat.txt using=tab : [heat_use,location] match_exist_capacity_electric_heat	match_exist_capacity_hydrogen_heat ;
+load match_exist_fuel_heat.txt using=tab : [fuel_source,heat_use,location] match_exist_capacity_fuel_heat ;
+
+load match_exist_electric_transport.txt using=tab : [transport_use,location] match_exist_capacity_electric_transport	match_exist_capacity_hydrogen_transport ;
+load match_exist_fuel_transport.txt using=tab : [fuel_source,transport_use,location] match_exist_capacity_fuel_transport ;
+
+### hydro and bioenergy sustainability
+
+param hydro_limit := 958572 ;
+param bioenergy_limit := 4731675 ;
+
+### policy
+
+param emit_fix := 966040400 ;
+param emit_switch := 864025500 ;	
+param emit_limit := 0 ; 

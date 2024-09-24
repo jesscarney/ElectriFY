@@ -1,0 +1,11 @@
+fuel_source	transport_use	match_invest_cost_fuel_transport	match_operate_cost_fuel_transport	match_retire_cost_fuel_transport	match_efficiency_fuel_transport
+biomass	lightduty	1E+12	1E+12	1E+12	0.001
+biomass	heavyduty	1E+12	1E+12	1E+12	0.001
+biofuel	lightduty	10936453	2069029	984917	1.13
+biofuel	heavyduty	13467819	10335589	1212887	1.042
+naturalgas	lightduty	1E+12	2069029	984917	1.615
+naturalgas	heavyduty	1E+12	10335589	1212887	1.489
+petroleum	lightduty	10936453	2069029	984917	1.615
+petroleum	heavyduty	13467819	10335589	1212887	1.489
+coal	lightduty	1E+12	1E+12	1E+12	0.001
+coal	heavyduty	1E+12	1E+12	1E+12	0.001

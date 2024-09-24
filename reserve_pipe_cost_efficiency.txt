@@ -1,0 +1,2 @@
+reserve_invest_cost	reserve_operate_cost	reserve_retire_cost	reserve_efficiency	reserve_refit_cost	reserve_max_flow	pipe_invest_cost	pipe_operate_cost	pipe_retire_cost	pipe_efficiency	pipe_refit_cost
+3703	2382	274	0.85	555	0.1	11096	7137	820	0.95	1664

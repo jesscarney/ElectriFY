@@ -1,0 +1,11 @@
+location	e2h_exist_capacity	h2e_exist_capacity
+ISONE	0.002	0
+NYISO	0.438	0
+PJM	0.119	0
+MISO	0.006	0
+SPP	0	0
+ERCOT	0.002	0
+CAISO	0.021	0
+Southeast	0.002	0
+Southwest	0.005	0
+Northwest	0.023	0

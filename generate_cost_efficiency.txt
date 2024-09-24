@@ -1,0 +1,8 @@
+electric_source	generate_invest_cost	generate_operate_cost	generate_retire_cost	generate_efficiency	generate_emit_rate
+solar	9036504	4162908	741835	1	0
+wind	10770733	9196528	884203	1	0
+hydro	61111601	23342984	15010318	1	0
+bioenergy	40326709	41620553	1526604	0.253	0
+nuclear	58780409	40270092	7320514	0.326	0
+fossil	12850788	7583333	437547	0.533	50.2
+other	1E+12	7583333	437547	0.326	90.7

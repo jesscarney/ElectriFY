@@ -1,0 +1,11 @@
+location	store_exist_capacity	reserve_exist_capacity
+ISONE	0.145	0
+NYISO	0.108	0
+PJM	2.139	0
+MISO	0.274	0
+SPP	0.014	0
+ERCOT	0.679	0
+CAISO	3.092	0
+Southeast	0.007	0
+Southwest	0.135	0
+Northwest	0.098	0

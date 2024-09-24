@@ -1,0 +1,6 @@
+fuel_source	fuel_emit_rate
+biomass	0
+biofuel	0
+naturalgas	50.2
+petroleum	67
+coal	90.7

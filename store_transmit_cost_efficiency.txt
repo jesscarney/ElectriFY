@@ -1,0 +1,2 @@
+store_invest_cost	store_operate_cost	store_retire_cost	store_efficiency	transmit_invest_cost	transmit_operate_cost	transmit_retire_cost	transmit_efficiency
+4070504	868056	379088	0.86	16090	10350	1189	0.95
